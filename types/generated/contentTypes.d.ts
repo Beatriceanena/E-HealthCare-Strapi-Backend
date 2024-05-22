@@ -788,6 +788,112 @@ export interface PluginI18NLocale extends Schema.CollectionType {
   };
 }
 
+export interface ApiMedicalpersonelMedicalpersonel
+  extends Schema.CollectionType {
+  collectionName: 'medicalpersonels';
+  info: {
+    singularName: 'medicalpersonel';
+    pluralName: 'medicalpersonels';
+    displayName: 'medicalpersonel';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    doctorname: Attribute.String & Attribute.Required;
+    email: Attribute.Email & Attribute.Required;
+    telephonenumber: Attribute.BigInteger & Attribute.Required;
+    image: Attribute.Media & Attribute.Required;
+    speciality: Attribute.String & Attribute.Required;
+    location: Attribute.String & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::medicalpersonel.medicalpersonel',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::medicalpersonel.medicalpersonel',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiPatientPatient extends Schema.CollectionType {
+  collectionName: 'patients';
+  info: {
+    singularName: 'patient';
+    pluralName: 'patients';
+    displayName: 'patient';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    username: Attribute.String & Attribute.Required;
+    email: Attribute.Email & Attribute.Required;
+    password: Attribute.Password & Attribute.Required;
+    confirmpassword: Attribute.Password & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::patient.patient',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::patient.patient',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiProductProduct extends Schema.CollectionType {
+  collectionName: 'products';
+  info: {
+    singularName: 'product';
+    pluralName: 'products';
+    displayName: 'Product';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    productname: Attribute.String;
+    image: Attribute.Media & Attribute.Required;
+    price: Attribute.Decimal & Attribute.Required;
+    description: Attribute.Text & Attribute.Required;
+    status: Attribute.String & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::product.product',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::product.product',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -806,6 +912,9 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'plugin::i18n.locale': PluginI18NLocale;
+      'api::medicalpersonel.medicalpersonel': ApiMedicalpersonelMedicalpersonel;
+      'api::patient.patient': ApiPatientPatient;
+      'api::product.product': ApiProductProduct;
     }
   }
 }
